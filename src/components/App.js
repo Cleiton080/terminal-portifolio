@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Terminal from "./Terminal";
 import { Container } from "@mui/material";
 
 function App() {
   const [history, setHistory] = useState([]);
 
-  const commands = [
-    [/clear/gi, () => setHistory([])],
-    [/setname\s([aA0-zZ9]{0,})$/gi, (command) => {}],
-    [/about/gi, () => {
-    }],
-    [/linkedin/gi, () => {}],
-  ];
+  const commands = useMemo(
+    () => [
+      [/clear/gi, () => setHistory([])],
+      [/setname\s([aA0-zZ9]{0,})$/gi, (command) => {}],
+      [
+        /about/gi,
+        () => {
+          console.log("aquii");
+        },
+      ],
+      [/linkedin/gi, () => {}],
+    ],
+    []
+  );
 
   return (
     <Container maxWidth="xl">
@@ -22,7 +29,7 @@ function App() {
         history={history}
         onCommandNotFound={(command) => `Command \`${command}\` not found`}
         onInputCommand={({ command, output }) =>
-          setHistory([...history, { command, output }])
+          setHistory((history) => [...history, { command, output }])
         }
       />
     </Container>

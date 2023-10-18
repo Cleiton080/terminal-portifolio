@@ -1,20 +1,17 @@
-import { Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Cmd({ username, hostname, onPressEnterKey, io }) {
   const [input, setInput] = useState("");
 
-  const handleKeyDown = (value) => {
-    if (value.which === 8) {
-      setInput((previusValue) => previusValue.slice(0, -1));
-    }
-
-    if (value.which === 13) {
-      return onPressEnterKey(input);
-    }
-
-    if (value.which >= 32 && value.which <= 126) {
-      setInput((previusValue) => previusValue + value.key);
+  const handleKeyDown = ({ which, key }) => {
+    if (which === 8) {
+      return setInput((input) => input.slice(0, -1));
+    } else if (which === 13) {
+      onPressEnterKey(input);
+      return setInput("");
+    } else if (which >= 32 && which <= 126) {
+      return setInput((input) => input + key);
     }
   };
 
@@ -26,14 +23,20 @@ export default function Cmd({ username, hostname, onPressEnterKey, io }) {
         document.removeEventListener("keydown", handleKeyDown);
       };
     }
-  }, []);
+  }, [input]);
 
   return (
-    <Grid container>
-      <Grid sx={2}>
-        {username}@{hostname}:~${` ${input}`}
+    <Container>
+      <Grid container>
+        <Grid item xs={12}>
+          <span>
+            {username}@{hostname}:~${` ${io ? io.command : input}`}
+          </span>
+        </Grid>
+        <Grid item xs={12}>
+          <span>{io ? io.output : null}</span>
+        </Grid>
       </Grid>
-      <Grid sx={10}></Grid>
-    </Grid>
+    </Container>
   );
 }

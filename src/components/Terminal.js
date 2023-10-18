@@ -9,7 +9,7 @@ export default function Terminal({
   onInputCommand,
 }) {
   const runCommand = (value) => {
-    for (let { command, action } of commands) {
+    for (let [ command, action ] of commands) {
       const match = value.match(command);
 
       if (match) {
@@ -27,7 +27,7 @@ export default function Terminal({
     const executableCommand = runCommand(value);
 
     if (!executableCommand) {
-      const output = onCommandNotFound();
+      const output = onCommandNotFound(value);
       onInputCommand({ command: value, output });
     }
   };
