@@ -1,6 +1,15 @@
 import { useMemo, useState } from "react";
+import { Box, Container } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Terminal from "./Terminal";
-import { Container } from "@mui/material";
+import Window from "./Window";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Ubuntu Mono, monospace",
+    fontSize: 20
+  },
+});
 
 function App() {
   const [history, setHistory] = useState([]);
@@ -21,18 +30,39 @@ function App() {
   );
 
   return (
-    <Container maxWidth="xl">
-      <Terminal
-        username="cleiton"
-        hostname="linux"
-        commands={commands}
-        history={history}
-        onCommandNotFound={(command) => `Command \`${command}\` not found`}
-        onInputCommand={({ command, output }) =>
-          setHistory((history) => [...history, { command, output }])
-        }
-      />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "#191F28",
+          zIndex: 9999,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Container maxWidth="sm">
+          <Window>
+            <Terminal
+              username="cleiton"
+              hostname="linux"
+              commands={commands}
+              history={history}
+              onCommandNotFound={(command) =>
+                `Command \`${command}\` not found`
+              }
+              onInputCommand={({ command, output }) =>
+                setHistory((history) => [...history, { command, output }])
+              }
+            />
+          </Window>
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 }
 

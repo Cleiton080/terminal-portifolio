@@ -1,8 +1,11 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import Prompt from "./Prompt";
 
 export default function Cmd({ username, hostname, onPressEnterKey, io }) {
   const [input, setInput] = useState("");
+
+  console.debug(input);
 
   const handleKeyDown = ({ which, key }) => {
     if (which === 8) {
@@ -26,17 +29,27 @@ export default function Cmd({ username, hostname, onPressEnterKey, io }) {
   }, [input]);
 
   return (
-    <Container>
-      <Grid container>
-        <Grid item xs={12}>
-          <span>
-            {username}@{hostname}:~${` ${io ? io.command : input}`}
-          </span>
-        </Grid>
-        <Grid item xs={12}>
-          <span>{io ? io.output : null}</span>
-        </Grid>
+    <Grid container>
+      <Grid item xs={12}>
+        <Prompt
+          username={username}
+          hostname={hostname}
+          command={io ? io.command : input}
+          textColorStextstyle={{
+            username: "#778D59",
+            at: "#3E989E",
+            hostname: "#405182",
+            cwd: "#952D48",
+            command: "white",
+          }}
+          cursor={!io}
+        />
       </Grid>
-    </Container>
+      <Grid item xs={12}>
+        <Typography component="span" color="white">
+          {io ? io.output : null}
+        </Typography>
+      </Grid>
+    </Grid>
   );
 }

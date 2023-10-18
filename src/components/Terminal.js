@@ -1,3 +1,4 @@
+import { Box, Container } from "@mui/material";
 import Cmd from "./Cmd";
 
 export default function Terminal({
@@ -9,7 +10,7 @@ export default function Terminal({
   onInputCommand,
 }) {
   const runCommand = (value) => {
-    for (let [ command, action ] of commands) {
+    for (let [command, action] of commands) {
       const match = value.match(command);
 
       if (match) {
@@ -33,7 +34,7 @@ export default function Terminal({
   };
 
   return (
-    <>
+    <Box>
       {history.map((io, index) => (
         <Cmd key={index} username={username} hostname={hostname} io={io} />
       ))}
@@ -43,6 +44,6 @@ export default function Terminal({
         hostname={hostname}
         onPressEnterKey={handlePressEnterKey}
       />
-    </>
+    </Box>
   );
 }
