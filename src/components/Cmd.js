@@ -5,8 +5,6 @@ import Prompt from "./Prompt";
 export default function Cmd({ username, hostname, onPressEnterKey, io }) {
   const [input, setInput] = useState("");
 
-  console.debug(input);
-
   const handleKeyDown = ({ which, key }) => {
     if (which === 8) {
       return setInput((input) => input.slice(0, -1));
