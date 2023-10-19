@@ -9,7 +9,18 @@ const Container = styled(Box)({
   width: "70%",
   height: "70%",
   backgroundColor: "#253239",
+  padding: 20,
   "overflow-y": "auto",
+  "&::-webkit-scrollbar": { // TODO: ADD AS GLOBAL STYLE
+    width: 20,
+  },
+  "&::-webkit-scrollbar-track": {
+    backgroundColor: "#1a2129",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "#28353B",
+    borderRadius: 2,
+  },
 });
 
 export default function Window({ children }) {
