@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Terminal from "./Terminal";
 import Window from "./Window";
 import styled from "@emotion/styled";
+import commands from "../common/commands";
 
 const theme = createTheme({
   typography: {
@@ -22,20 +23,7 @@ const Container = styled(Box)({
 function App() {
   const [history, setHistory] = useState([]);
 
-  const commands = useMemo(
-    () => [
-      [/clear/gi, () => setHistory([])],
-      [/setname\s([aA0-zZ9]{0,})$/gi, (command) => {}],
-      [
-        /about/gi,
-        () => {
-          console.log("aquii");
-        },
-      ],
-      [/linkedin/gi, () => {}],
-    ],
-    []
-  );
+  const cmd = useMemo(() => commands, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,7 +32,7 @@ function App() {
           <Terminal
             username="cleiton"
             hostname="linux"
-            commands={commands}
+            commands={cmd}
             history={history}
             onCommandNotFound={(command) => `Command \`${command}\` not found`}
             onInputCommand={({ command, output }) =>
