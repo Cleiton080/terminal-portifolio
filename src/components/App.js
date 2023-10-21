@@ -5,6 +5,7 @@ import Terminal from "./Terminal";
 import Window from "./Window";
 import styled from "@emotion/styled";
 import commands from "../common/commands";
+import Welcome from "../pages/Welcome";
 
 const theme = createTheme({
   typography: {
@@ -21,7 +22,12 @@ const Container = styled(Box)({
 });
 
 function App() {
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([
+    {
+      command: null,
+      output: <Welcome />,
+    },
+  ]);
 
   const cmd = useMemo(() => commands, []);
 
