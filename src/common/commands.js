@@ -1,6 +1,6 @@
-import About from "./about";
-import Help from "./help";
-import Version from "./version";
+import Help from "../pages/Help";
+import Version from "../pages/Version";
+import About from "../pages/About";
 
 export default [
   [/help/gi, () => <Help />],
