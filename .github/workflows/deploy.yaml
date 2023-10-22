@@ -52,6 +52,7 @@ jobs:
         with:
           name: ${{ env.build-artifact-name }}
           path: ./build
+          retention-days: 1
 
   deployment:
     name: Deployment to AWS
@@ -76,4 +77,6 @@ jobs:
           name: ${{ env.build-artifact-name }}
 
       - name: Deploy Static Files
-        run: aws s3 cp ./${{ env.build-artifact-name }} s3://${{ env.AWS_S3_BUCKET }} --recursive
+        run: |-
+          ls -la
+          aws s3 cp ${{ env.build-artifact-name }} s3://${{ env.AWS_S3_BUCKET }} --recursive
