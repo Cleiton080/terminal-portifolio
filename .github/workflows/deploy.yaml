@@ -6,6 +6,9 @@ on:
     branches:
       - main
 
+env:
+  build-artifact-name: latest-build-artifact
+
 jobs:
   testing:
     name: Testing
@@ -44,11 +47,11 @@ jobs:
       - name: Build Static Files
         run: npm run build
 
-      - name: Caching Static Files
-        uses: actions/cache@v2
+      - name:  Upload Artifacts
+        uses: actions/upload-artifact@v2
         with:
+          name: ${{ env.build-artifact-name }}
           path: ./build
-          key: ${{ runner.os }}-build
 
   deployment:
     name: Deployment to AWS
@@ -66,6 +69,11 @@ jobs:
           aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }}
           aws configure set region ${{ env.AWS_REGION }}
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.build-artifact-name }}
 
       - name: Deploy Static Files
         run: aws s3 sync ./build s3://${{ env.AWS_S3_BUCKET }}
