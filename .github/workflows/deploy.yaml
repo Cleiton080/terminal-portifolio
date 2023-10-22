@@ -78,5 +78,5 @@ jobs:
 
       - name: Deploy Static Files
         run: |-
-          ls -la
-          aws s3 cp ${{ env.build-artifact-name }} s3://${{ env.AWS_S3_BUCKET }} --recursive
+          pwd
+          aws s3 cp ./ s3://${{ env.AWS_S3_BUCKET }} --recursive
