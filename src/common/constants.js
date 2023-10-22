@@ -1,3 +1,3 @@
 export const socials = {
-  linkedin: "http://linkedin.com",
+  linkedin: "https://br.linkedin.com/in/cleitonpessoa",
 };

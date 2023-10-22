@@ -11,6 +11,7 @@ const Container = styled(Box)({
   backgroundColor: "#253239",
   padding: 20,
   "overflow-y": "auto",
+  boxShadow: '.5em .5em 10em #1d1712',
   "&::-webkit-scrollbar": { // TODO: ADD AS GLOBAL STYLE
     width: 20,
   },
