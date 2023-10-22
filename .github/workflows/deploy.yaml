@@ -76,4 +76,4 @@ jobs:
           name: ${{ env.build-artifact-name }}
 
       - name: Deploy Static Files
-        run: aws s3 sync ./build s3://${{ env.AWS_S3_BUCKET }}
+        run: aws s3 sync ./${{ env.build-artifact-name }} s3://${{ env.AWS_S3_BUCKET }}
