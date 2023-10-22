@@ -1,15 +1,69 @@
-import { Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+import me from "../assets/ascii/me";
+import { transformAsciiImage } from "../common/utils";
 
 export default function About() {
-  const paragraphs = [
-    "Greetings! I am Cleiton, and I'm currently completing my Computer Science degree at Unifacs. Additionally, I am a certified technician in Systems Development from SENAI. Throughout my academic journey, I have accumulated a wealth of experiences that have greatly influenced my professional path. I am deeply passionate about technology and am committed to expanding my knowledge in software development and cloud infrastructure.",
-    "In my current role at a software house, I am exposed to a diverse range of programming languages and exciting challenges. This opportunity allows me to continue honing my skills and expertise in the ever-evolving field of technology.",
-    "As I progress in my professional journey, I am driven by a deep passion for technology and a strong determination to push the boundaries of what I can achieve. I firmly believe in the power of continuous learning and seize every opportunity to contribute to innovative solutions. I am excited about the future of technology and the possibilities it holds.",
+  const image = transformAsciiImage(me, 2);
+
+  const specializationList = [
+    "* Web Application Development",
+    "* Software Architecture",
+    "* Continuous Integration and Continuous Delivery (CI/CD)",
+    "* Collaboration in Multidisciplinary Teams",
   ];
 
-  return paragraphs.map((paragraph) => (
-    <Typography marginBottom={3}>
-      {paragraph}
-    </Typography>
-  ));
+  return (
+    <Stack
+      spacing={{ xs: 1, sm: 2 }}
+      direction="row"
+      useFlexGap
+      flexWrap="nowrap"
+    >
+      {image}
+      <Box>
+        <Typography gutterBottom>
+          Hello, I'm Cleiton, a software developer passionate about translating
+          lines of code into innovative solutions, and currently, I'm exploring
+          the exciting world of DevOps. With over 4 years of experience in the
+          technology industry, I've tackled challenging projects that have
+          allowed me to grow and evolve continuously.
+        </Typography>
+        <Typography gutterBottom>
+          My professional journey has been marked by an unwavering pursuit of
+          excellence in software development. My main areas of expertise
+          include:
+        </Typography>
+        <List>
+          {specializationList.map((specialization) => (
+            <ListItem>
+              <ListItemText primary={specialization} />
+            </ListItem>
+          ))}
+        </List>
+        <Typography gutterBottom>
+          My approach to software development is based on problem-solving and a
+          constant quest for improvement. I believe that technology has the
+          power to positively impact people's lives, and I'm committed to
+          creating solutions that are not only functional but also intuitive and
+          enjoyable to use.
+        </Typography>
+        <Typography gutterBottom>
+          I believe that the success of any project depends not only on the code
+          but also on how people work together.
+        </Typography>
+        <Typography gutterBottom>
+          I'm always eager to stay updated on the latest industry trends and
+          take on new challenges.
+        </Typography>
+      </Box>
+    </Stack>
+  );
 }

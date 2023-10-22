@@ -5,3 +5,14 @@ export function redirectTo(url, options) {
 
   return null;
 }
+
+export function transformAsciiImage(ascii, fontSize) {
+  return (
+    <span
+      style={{
+        fontSize,
+      }}
+      dangerouslySetInnerHTML={{ __html: ascii }}
+    />
+  );
+}
