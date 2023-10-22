@@ -1,0 +1,71 @@
+---
+name: Portifolio Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  testing:
+    name: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Unit Tests
+        run: npm run test
+
+  build:
+    name: Build
+    needs: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build Static Files
+        run: npm run build
+
+      - name: Caching Static Files
+        uses: actions/cache@v2
+        with:
+          path: ./build
+          key: ${{ runner.os }}-build
+
+  deployment:
+    name: Deployment to AWS
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+    steps:
+      - name: Setup AWS
+        run: -|
+          pip3 install awscli
+          aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws configure set region ${{ env.AWS_REGION }}
+
+      - name: Deploy Static Files
+        run: aws s3 sync ./build s3://${{ env.AWS_S3_BUCKET }}
