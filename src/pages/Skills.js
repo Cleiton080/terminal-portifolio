@@ -7,98 +7,44 @@ import {
 } from "@mui/material";
 
 export default function Skills() {
-  const hardSkills = [
+  const skills = [
     {
-      title: "Infrastructure as Code (IaC)",
-      content: [
-        "HashiCorp Certified: Terraform Associate (003)",
-        "Uncomplicating Terraform",
-      ],
+      title: 'Programming Languages',
+      description: 'Javascript, Python, Ruby, PHP, Bash',
     },
     {
-      title: "Terraform",
-      content: [
-        "HashiCorp Certified: Terraform Associate (003)",
-        "Uncomplicating Terraform",
-      ],
+      title: 'Front-end Technologies',
+      description: 'Html5, Css3, ReactJs, React Native, nextjs',
     },
     {
-      title: "AWS",
-      content: [
-        "AWS Certified Cloud Practitioner",
-        "Passed LinkedIn skills assessment",
-      ],
+      title: 'Back-end Technologies',
+      description: 'Node, Nestjs, Express, Adonisjs, Ruby on Rails',
     },
     {
-      title: "Docker",
-      content: ["Certificate of Achievement: DESCOMPLICANDO DOCKER"],
+      title: 'Databases',
+      description: 'MySql, Postgres, Sqlite, Mongodb, Redis, DynamoDb',
     },
     {
-      title: "Ruby on Rails",
-      content: ["Passed LinkedIn skills assessment"],
+      title: 'DevOps',
+      description: 'Docker, Terraform, ELK, Github Actions, Gitlab ci',
     },
     {
-      title: "PHP",
-      content: ["Passed LinkedIn skills assessment"],
+      title: 'Cloud',
+      description: 'AWS, GCP',
     },
-    {
-      title: "Git",
-      content: ["Passed LinkedIn skills assessment"],
-    },
-    {
-      title: "MySQL",
-      content: ["Passed LinkedIn skills assessment"],
-    },
-    {
-      title: "JavaScript",
-      content: ["Passed LinkedIn skills assessment"],
-    },
-    {
-      title: "React.js",
-      content: ["Passed LinkedIn skills assessment"],
-    },
-    {
-      title: "Python",
-      content: ["Passed LinkedIn skills assessment"],
-    },
-  ];
-
-  const softSkills = [
-    "Problem Solving",
-    "Teamwork",
-    "Communication",
-    "Adaptability",
-    "Critical Thinking",
   ];
 
   const languages = ["Portuguese (Native)", "English (Advanced)"];
 
   return (
     <>
-      <Typography>Hard Skills and Certifications</Typography>
       <List>
-        {hardSkills.map((skill) => (
-          <ListItem>
+        {skills.map((skill, index) => (
+          <ListItem key={index}>
             <ListItemText primary={skill.title} />
-            {/* {skill.content.map((item) => (
-              <Typography>{item}</Typography>
-            ))} */}
-          </ListItem>
-        ))}
-      </List>
-      <Typography>Soft Skills</Typography>
-      <List>
-        {softSkills.map((skill) => (
-          <ListItem>
-            <ListItemText primary={skill} />
-          </ListItem>
-        ))}
-      </List>
-      <Typography>Languages</Typography>
-      <List>
-        {languages.map((language) => (
-          <ListItem>
-            <ListItemText primary={language} />
+            <ListItemSecondaryAction>
+              <Typography>{skill.description}</Typography>
+            </ListItemSecondaryAction>
           </ListItem>
         ))}
       </List>
