@@ -34,8 +34,6 @@ export default function Skills() {
     },
   ];
 
-  const languages = ["Portuguese (Native)", "English (Advanced)"];
-
   return (
     <>
       <List>

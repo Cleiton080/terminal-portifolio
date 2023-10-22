@@ -1,20 +1,23 @@
 import { Grid, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Prompt from "./Prompt";
 
 export default function Cmd({ username, hostname, onPressEnterKey, io }) {
   const [input, setInput] = useState("");
 
-  const handleKeyDown = ({ which, key }) => {
-    if (which === 8) {
-      return setInput((input) => input.slice(0, -1));
-    } else if (which === 13) {
-      onPressEnterKey(input);
-      return setInput("");
-    } else if (which >= 32 && which <= 126) {
-      return setInput((input) => input + key);
-    }
-  };
+  const handleKeyDown = useCallback(
+    ({ which, key }) => {
+      if (which === 8) {
+        return setInput((input) => input.slice(0, -1));
+      } else if (which === 13) {
+        onPressEnterKey(input);
+        return setInput("");
+      } else if (which >= 32 && which <= 126) {
+        return setInput((input) => input + key);
+      }
+    },
+    [setInput, input, onPressEnterKey]
+  );
 
   useEffect(() => {
     if (!io) {
@@ -24,7 +27,7 @@ export default function Cmd({ username, hostname, onPressEnterKey, io }) {
         document.removeEventListener("keydown", handleKeyDown);
       };
     }
-  }, [input]);
+  }, [handleKeyDown, io]);
 
   return (
     <Grid container>

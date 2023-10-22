@@ -1,6 +1,5 @@
 import {
   Box,
-  Grid,
   List,
   ListItem,
   ListItemText,
