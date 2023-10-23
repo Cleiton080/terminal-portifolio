@@ -19,7 +19,7 @@ export default function About() {
   return (
     <Grid container spacing={2} direction="row" flexWrap="nowrap">
       <Grid item md={4}>
-        <img src={me} alt="A ascii photo of myself" width="100%"/>
+        <img src={me} alt="This is me" width="100%" />
       </Grid>
       <Grid item md={7}>
         <Box>
