@@ -3,7 +3,6 @@ import Version from "../pages/Version";
 import About from "../pages/About";
 import Skills from "../pages/Skills";
 import Experiences from "../pages/Experiences";
-import Projects from "../pages/Projects";
 import { redirectTo } from "./utils";
 import { socials } from "./constants";
 
@@ -14,7 +13,7 @@ const commands = [
   [/about/gi, () => <About />],
   [/skills/gi, () => <Skills />],
   [/experiences/gi, () => <Experiences />],
-  [/projects/gi, () => <Projects />],
+  [/projects/gi, () => redirectTo(socials.github, { target: "_blank" })],
   [/linkedin/gi, () => redirectTo(socials.linkedin, { target: "_blank" })],
 ];
 

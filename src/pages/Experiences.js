@@ -53,7 +53,7 @@ export default function Experiences() {
 
       {experiences.map((experience) => (
         <Grid container spacing={2} direction="row" flexWrap="nowrap">
-          <Grid item md={2}>
+          <Grid item md={4}>
             <img src={experience.image} alt={experience.alt} width="100%" />
           </Grid>
           <Grid item md={7}>

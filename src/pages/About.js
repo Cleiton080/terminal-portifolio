@@ -18,10 +18,10 @@ export default function About() {
 
   return (
     <Grid container spacing={2} direction="row" flexWrap="nowrap">
-      <Grid item md={4}>
+      <Grid item md={5}>
         <img src={me} alt="This is me" width="100%" />
       </Grid>
-      <Grid item md={7}>
+      <Grid item md={6}>
         <Box>
           <Typography gutterBottom>
             Hello, I'm Cleiton, a software developer passionate about
