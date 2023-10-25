@@ -28,9 +28,30 @@ jobs:
       # - name: Unit Tests
       #   run: npm run test
 
+  versioning:
+    name: Semantic Versioning
+    needs: testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+
   build:
     name: Build
-    needs: testing
+    needs: versioning
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
