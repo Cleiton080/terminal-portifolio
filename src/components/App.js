@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Terminal from "./Terminal";
@@ -29,7 +29,7 @@ function App() {
     },
   ]);
 
-  const cmd = useMemo(() => commands, []);
+  const cmd = commands(history, setHistory);
 
   return (
     <ThemeProvider theme={theme}>

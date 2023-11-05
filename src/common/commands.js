@@ -6,8 +6,8 @@ import Experiences from "../pages/Experiences";
 import { redirectTo } from "./utils";
 import { socials } from "./constants";
 
-const commands = [
-  [/clear/gi, () => {}],
+const commands = (history, historyHandler) => [
+  [/clear/gi, () => historyHandler([])],
   [/help/gi, () => <Help />],
   [/version/gi, () => <Version />],
   [/about/gi, () => <About />],
